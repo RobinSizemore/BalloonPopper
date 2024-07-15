@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://de5p3mcfupih2"]
+
+[ext_resource type="Shader" path="res://Assets/Shaders/balloon.gdshader" id="1_h7eng"]
+[ext_resource type="Script" path="res://Scenes/Balloons/Balloon.gd" id="1_ksbav"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mms7h"]
+resource_local_to_scene = true
+albedo_color = Color(0, 0.7, 0.256667, 0.784314)
+roughness = 0.0
+rim_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_hi0oj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xu6qj"]
+render_priority = 0
+shader = ExtResource("1_h7eng")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ig3k8"]
+
+[node name="Balloon" type="Area3D"]
+script = ExtResource("1_ksbav")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_mms7h")
+mesh = SubResource("SphereMesh_hi0oj")
+surface_material_override/0 = SubResource("ShaderMaterial_xu6qj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_ig3k8")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
