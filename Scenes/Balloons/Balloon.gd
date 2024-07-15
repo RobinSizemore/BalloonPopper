@@ -7,12 +7,14 @@ extends Area3D
 @export var movement_speed: float = 1.0
 
 var clicks = 0
-var manager
+var score_manager
+var lives_manager
 var since_spawn = 0.0
 var bob_height: float = 2.0
 
 func _ready():
-	manager = get_node("/root/main/ScoreManager")
+	score_manager = get_node("/root/main/ScoreManager")
+	lives_manager = get_node("/root/main/LivesManager")
 	
 func _process(delta):
 	since_spawn += delta
@@ -23,6 +25,7 @@ func _process(delta):
 	translate(Vector3(0, bobbing, 0) * delta)
 	# Check if off-screen and remove
 	if global_transform.origin.z > 7.5: # Assuming 5 is off-screen to the right
+		lives_manager.decrease_lives()
 		queue_free()
 	
 func set_difficulty(difficulty: int = 1):
@@ -55,7 +58,7 @@ func set_color(difficulty: int = 1):
 func pump_up():
 	scale += Vector3.ONE * size_increase
 	if clicks >= clicks_to_pop:
-		manager.increase_score(score_increase)
+		score_manager.increase_score(score_increase)
 		pop_balloon()
 
 func pop_balloon():

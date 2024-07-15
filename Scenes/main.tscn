@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cykstd05airbu"]
+[gd_scene load_steps=8 format=3 uid="uid://cykstd05airbu"]
 
 [ext_resource type="Script" path="res://Scenes/Managers/BalloonManager.gd" id="1_1iwse"]
 [ext_resource type="PackedScene" uid="uid://de5p3mcfupih2" path="res://Scenes/Balloons/Balloon.tscn" id="1_5kvhh"]
 [ext_resource type="Script" path="res://Scenes/ScoreManager.gd" id="1_ktmpq"]
 [ext_resource type="Script" path="res://Scenes/Managers/LivesManager.gd" id="2_2yx4n"]
+[ext_resource type="PackedScene" uid="uid://c0gowdly3fpea" path="res://Scenes/game_over.tscn" id="3_f730y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2mkd3"]
 font_size = 32
@@ -20,14 +21,16 @@ text = "Score: 0"
 label_settings = SubResource("LabelSettings_2mkd3")
 script = ExtResource("1_ktmpq")
 
-[node name="Lives" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="LivesManager" type="Label" parent="."]
+offset_top = 35.0
+offset_right = 130.0
+offset_bottom = 80.0
 size_flags_horizontal = 8
 text = "Lives: 10"
 label_settings = SubResource("LabelSettings_abv3f")
 horizontal_alignment = 2
 script = ExtResource("2_2yx4n")
+game_over_scene = ExtResource("3_f730y")
 
 [node name="BalloonManager" type="Node" parent="."]
 script = ExtResource("1_1iwse")
